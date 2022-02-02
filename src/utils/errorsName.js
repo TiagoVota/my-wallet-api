@@ -1,5 +1,5 @@
 const errorsName = [
-	'ExampleError',
+	'AuthError',
 	'SchemaError',
 ]
 
