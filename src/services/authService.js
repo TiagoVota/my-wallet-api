@@ -1,12 +1,16 @@
 import bcrypt from 'bcrypt'
+import { v4 as uuid } from 'uuid'
 
 import * as authRepository from '../repositories/authRepository.js'
+import * as sessionRepository from '../repositories/sessionRepository.js'
 import * as authValidation from '../validations/authValidation.js'
 
 import { validationErrors } from '../validations/handleValidation.js'
 
 import SchemaError from '../errors/SchemaError.js'
 import SignUpConflictError from '../errors/SignUpConflictError.js'
+import NoFoundUserError from '../errors/NoFoundUserError.js'
+import IncorrectPasswordError from '../errors/IncorrectPasswordError.js'
 
 
 const createUser = async (signUpInfo) => {
@@ -18,10 +22,9 @@ const createUser = async (signUpInfo) => {
 	if (signUpErrors) throw new SchemaError(signUpErrors)
 	const { email, password } = signUpInfo
 
-	const existentUser = await authRepository.findUserByEmail({ email })
-	console.log({ existentUser })
+	const registeredUser = await authRepository.findUserByEmail({ email })
 
-	if (existentUser) throw new SignUpConflictError(email)
+	if (registeredUser) throw new SignUpConflictError(email)
 
 	const hashPassword = bcrypt.hashSync(password, 12)
 
@@ -34,7 +37,33 @@ const createUser = async (signUpInfo) => {
 }
 
 
+const loginUser = async (loginInfo) => {
+	const loginErrors = validationErrors({
+		objectToValid: loginInfo,
+		objectValidation: authValidation.loginSchema
+	})
+
+	if (loginErrors) throw new SchemaError(loginErrors)
+	const { email, password } = loginInfo
+
+	const registeredUser = await authRepository.findUserByEmail({ email })
+	
+	if (!registeredUser) throw new NoFoundUserError(email)
+	const { _id: userId, password: hashedPassword } = registeredUser
+
+	const isValidLogin = bcrypt.compareSync(password, hashedPassword)
+
+	if (!isValidLogin) throw new IncorrectPasswordError()
+
+	const token = uuid()
+
+	const session = await sessionRepository.insertSession({ userId, token })
+	
+	return { ...session, token }
+}
+
 
 export {
 	createUser,
+	loginUser,
 }

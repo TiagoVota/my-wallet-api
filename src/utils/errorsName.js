@@ -1,5 +1,7 @@
 const errorsName = [
 	'AuthError',
+	'IncorrectPasswordError',
+	'NoFoundUserError',
 	'SchemaError',
 	'SignUpConflictError',
 ]

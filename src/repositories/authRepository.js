@@ -5,7 +5,6 @@ const findUserByEmail = async ({ email }) => {
 	const { mongoClient, db } = await connection()
 
 	const user = await db.collection('users').findOne({ email })
-	console.log({ user })
 	await mongoClient.close()
 
 	if (!user) return null
