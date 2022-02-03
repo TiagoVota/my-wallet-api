@@ -17,7 +17,7 @@ app.use(express.json())
 
 app.use('/health', healthRouter)
 app.use('/auth', authRouter)
-app.use('/movement', movementRouter)
+app.use('/movements', movementRouter)
 app.use('/balance', balanceRouter)
 
 app.use(backMiddlewareError)
