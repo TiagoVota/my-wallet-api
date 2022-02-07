@@ -52,8 +52,18 @@ const editTransaction = async (transactionInfo) => {
 }
 
 
+const removeTransaction = async ({ transactionId }) => {
+	transactionId = new ObjectId(transactionId)
+
+	const transaction = await transactionRepository.deleteTransaction({ transactionId })
+
+	return transaction
+}
+
+
 export {
 	listTransactions,
 	addTransaction,
 	editTransaction,
+	removeTransaction,
 }

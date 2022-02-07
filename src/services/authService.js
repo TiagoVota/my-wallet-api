@@ -70,8 +70,6 @@ const logoutUser = async ({ userId }) => {
 }
 
 
-
-
 export {
 	createUser,
 	loginUser,
