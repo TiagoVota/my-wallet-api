@@ -22,8 +22,10 @@ const addTransaction = async (transactionInfo) => {
 
 	if (transactionErrors) throw new SchemaError(transactionErrors)
 
-	const transaction = await transactionRepository
-		.insertTransaction(transactionInfo)
+	const transaction = await transactionRepository.insertTransaction({
+		...transactionInfo,
+		date: Date.now()
+	})
 
 	return transaction
 }

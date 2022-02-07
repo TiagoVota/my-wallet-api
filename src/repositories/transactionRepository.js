@@ -12,10 +12,10 @@ const findTransactionByUserId = async ({ userId }) => {
 }
 
 
-const insertTransaction = async ({ value, description, userId }) => {
+const insertTransaction = async ({ value, description, date, userId }) => {
 	const { mongoClient, db } = await connection()
 
-	const body = { value, description, userId }
+	const body = { value, description, date, userId }
 
 	const transactions = await db.collection('transactions').insertOne(body)
 	await mongoClient.close()
