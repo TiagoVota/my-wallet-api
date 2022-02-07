@@ -63,7 +63,17 @@ const loginUser = async (loginInfo) => {
 }
 
 
+const logoutUser = async ({ userId }) => {
+	const sessions = await sessionRepository.deleteSessionsByUserId({ userId })
+
+	return sessions
+}
+
+
+
+
 export {
 	createUser,
 	loginUser,
+	logoutUser,
 }

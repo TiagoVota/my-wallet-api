@@ -9,7 +9,8 @@ const router = new Router()
 
 router.post('/sign-up', authController.signUp)
 router.post('/login', authController.login)
-// router.post('/logout', authMiddleware, authController.logout)
+
+router.delete('/logout', authMiddleware, authController.logout)
 
 
 export default router

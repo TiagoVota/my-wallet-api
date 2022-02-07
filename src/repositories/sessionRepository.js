@@ -22,7 +22,18 @@ const findSessionByToken = async ({ token }) => {
 }
 
 
+const deleteSessionsByUserId = async ({ userId }) => {
+	const { mongoClient, db } = await connection()
+
+	const sessions = await db.collection('sessions').deleteMany({ userId })
+	mongoClient.close()
+
+	return sessions
+}
+
+
 export {
 	insertSession,
 	findSessionByToken,
+	deleteSessionsByUserId,
 }
