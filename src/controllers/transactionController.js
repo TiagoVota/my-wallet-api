@@ -33,7 +33,28 @@ const sendTransaction = async (req, res, next) => {
 }
 
 
+const updateTransaction = async (req, res, next) => {
+	const {
+		body: transactionInfo,
+		params: { transactionId },
+	} = req
+
+	try {
+		const transaction = await transactionService.editTransaction({
+			...transactionInfo,
+			transactionId
+		})
+		
+		return res.status(200).send(transaction)
+
+	} catch (error) {		
+		next(error)
+	}
+}
+
+
 export {
 	getTransactions,
 	sendTransaction,
+	updateTransaction,
 }

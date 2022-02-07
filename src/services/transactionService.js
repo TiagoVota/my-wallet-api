@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 import * as transactionRepository from '../repositories/transactionRepository.js'
 import * as transactionSchema from '../schemas/transactionSchema.js'
 
@@ -17,7 +19,7 @@ const listTransactions = async ({ userId }) => {
 const addTransaction = async (transactionInfo) => {
 	const transactionErrors = validationErrors({
 		objectToValid: transactionInfo,
-		objectValidation: transactionSchema.transactionSchema
+		objectValidation: transactionSchema.sendTransactionSchema
 	})
 
 	if (transactionErrors) throw new SchemaError(transactionErrors)
@@ -31,7 +33,27 @@ const addTransaction = async (transactionInfo) => {
 }
 
 
+const editTransaction = async (transactionInfo) => {
+	const { transactionId } = transactionInfo
+	transactionInfo.transactionId = new ObjectId(transactionId)
+	
+	const transactionErrors = validationErrors({
+		objectToValid: transactionInfo,
+		objectValidation: transactionSchema.editTransactionSchema
+	})
+
+	if (transactionErrors) throw new SchemaError(transactionErrors)
+
+	const transaction = await transactionRepository.updateTransaction({
+		...transactionInfo
+	})
+
+	return transaction
+}
+
+
 export {
 	listTransactions,
 	addTransaction,
+	editTransaction,
 }

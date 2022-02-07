@@ -13,5 +13,7 @@ router.get('', transactionController.getTransactions)
 
 router.post('', transactionController.sendTransaction)
 
+router.put('/:transactionId', transactionController.updateTransaction)
+
 
 export default router
