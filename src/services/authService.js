@@ -49,7 +49,7 @@ const loginUser = async (loginInfo) => {
 	const registeredUser = await authRepository.findUserByEmail({ email })
 	
 	if (!registeredUser) throw new NoFoundUserError(email)
-	const { _id: userId, password: hashedPassword } = registeredUser
+	const { _id: userId, password: hashedPassword, name } = registeredUser
 
 	const isValidLogin = bcrypt.compareSync(password, hashedPassword)
 
@@ -59,7 +59,7 @@ const loginUser = async (loginInfo) => {
 
 	const session = await sessionRepository.insertSession({ userId, token })
 	
-	return { ...session, token }
+	return { ...session, name, token }
 }
 
 
