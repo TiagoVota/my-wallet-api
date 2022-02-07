@@ -17,14 +17,30 @@ const insertTransaction = async ({ value, description, date, userId }) => {
 
 	const body = { value, description, date, userId }
 
-	const transactions = await db.collection('transactions').insertOne(body)
+	const transaction = await db.collection('transactions').insertOne(body)
 	await mongoClient.close()
 
-	return transactions
+	return transaction
+}
+
+
+const updateTransaction = async ({ value, description, transactionId }) => {
+	const { mongoClient, db } = await connection()
+
+	const transaction = await db.collection('transactions').updateOne(
+		{ _id: transactionId },
+		{
+			$set: { value, description }
+		}
+	)
+	await mongoClient.close()
+
+	return transaction
 }
 
 
 export {
 	findTransactionByUserId,
 	insertTransaction,
+	updateTransaction,
 }
