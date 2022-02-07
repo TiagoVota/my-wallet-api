@@ -28,7 +28,22 @@ const login = async (req, res, next) => {
 }
 
 
+const logout = async (req, res, next) => {
+	const { locals: { userId } } = res
+
+	try {
+		const sessions = await authService.logoutUser({ userId })
+		
+		return res.status(200).send(sessions)
+
+	} catch (error) {		
+		next(error)
+	}
+}
+
+
 export {
 	login,
 	signUp,
+	logout,
 }
