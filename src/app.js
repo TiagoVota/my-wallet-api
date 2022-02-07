@@ -3,8 +3,7 @@ import express from 'express'
 
 import healthRouter from './routers/healthRouter.js'
 import authRouter from './routers/authRouter.js'
-import movementRouter from './routers/movementRouter.js'
-import balanceRouter from './routers/balanceRouter.js'
+import transactionRouter from './routers/transactionRouter.js'
 
 import backMiddlewareError from './middlewares/backMiddlewareError.js'
 import serverMiddlewareError from './middlewares/serverMiddlewareError.js'
@@ -17,8 +16,7 @@ app.use(express.json())
 
 app.use('/health', healthRouter)
 app.use('/auth', authRouter)
-app.use('/movements', movementRouter)
-app.use('/balance', balanceRouter)
+app.use('/transactions', transactionRouter)
 
 app.use(backMiddlewareError)
 app.use(serverMiddlewareError)

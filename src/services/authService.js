@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 
 import * as authRepository from '../repositories/authRepository.js'
 import * as sessionRepository from '../repositories/sessionRepository.js'
-import * as authValidation from '../validations/authValidation.js'
+import * as authSchema from '../schemas/authSchema.js'
 
 import { validationErrors } from '../validations/handleValidation.js'
 
@@ -16,7 +16,7 @@ import IncorrectPasswordError from '../errors/IncorrectPasswordError.js'
 const createUser = async (signUpInfo) => {
 	const signUpErrors = validationErrors({
 		objectToValid: signUpInfo,
-		objectValidation: authValidation.signUpSchema
+		objectValidation: authSchema.signUpSchema
 	})
 
 	if (signUpErrors) throw new SchemaError(signUpErrors)
@@ -40,7 +40,7 @@ const createUser = async (signUpInfo) => {
 const loginUser = async (loginInfo) => {
 	const loginErrors = validationErrors({
 		objectToValid: loginInfo,
-		objectValidation: authValidation.loginSchema
+		objectValidation: authSchema.loginSchema
 	})
 
 	if (loginErrors) throw new SchemaError(loginErrors)
