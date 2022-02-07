@@ -53,8 +53,23 @@ const updateTransaction = async (req, res, next) => {
 }
 
 
+const eraseTransaction = async (req, res, next) => {
+	const { params: { transactionId }	} = req
+
+	try {
+		const transaction = await transactionService.removeTransaction({ transactionId })
+		
+		return res.status(200).send(transaction)
+
+	} catch (error) {		
+		next(error)
+	}
+}
+
+
 export {
 	getTransactions,
 	sendTransaction,
 	updateTransaction,
+	eraseTransaction,
 }

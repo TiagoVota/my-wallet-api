@@ -15,5 +15,7 @@ router.post('', transactionController.sendTransaction)
 
 router.put('/:transactionId', transactionController.updateTransaction)
 
+router.delete('/:transactionId', transactionController.eraseTransaction)
+
 
 export default router

@@ -39,8 +39,21 @@ const updateTransaction = async ({ value, description, transactionId }) => {
 }
 
 
+const deleteTransaction = async ({ transactionId }) => {
+	const { mongoClient, db } = await connection()
+
+	const transaction = await db.collection('transactions').deleteOne({
+		_id: transactionId
+	})
+	await mongoClient.close()
+
+	return transaction
+}
+
+
 export {
 	findTransactionByUserId,
 	insertTransaction,
 	updateTransaction,
+	deleteTransaction,
 }
