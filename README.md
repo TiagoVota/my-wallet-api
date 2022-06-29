@@ -44,7 +44,7 @@ Com My Wallet API, você poderá fazer cadastro e login de usuários; criar entr
 		- [`PUT /transactions/:transactionId`](#put-transactionstransactionid)
 		- [`DELETE /transactions/:transactionId`](#delete-transactionstransactionid)
 		- [`DELETE /auth/logout`](#delete-authlogout)
-	- [👨🏼‍💻 Autores](#-autores)
+	- [👨🏼‍💻 Autor](#-autor)
 <!--te-->
 
 <br/>
