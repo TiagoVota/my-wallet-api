@@ -76,13 +76,13 @@ Seguir os passos descritos na seção de [instalação do app](https://github.co
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/TiagoVota/my-Wallet-api
+git clone https://github.com/TiagoVota/my-Wallet-api
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd my-wallet-api
+cd my-wallet-api
 
 # Instale as dependências
-$ npm install
+npm install
 
 ```
 
@@ -104,7 +104,7 @@ Na pasta principal da API, crie um arquivo `.env.dev` aos mesmos moldes do arqui
 ```bash
 
 # Execute a aplicação em modo de desenvolvimento
-$ npm run start:dev
+npm run start:dev
 
 # O servidor inciará na porta:PORT (escolhida no arquivo .env) - acesse http://localhost:PORT 
 
