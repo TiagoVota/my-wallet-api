@@ -135,7 +135,7 @@ Agora veremos quais os principais endpoints dessa aplicação
 <br/>
 
 
-## 👨🏼‍💻 Autores
+## 👨🏼‍💻 Autor
 
 <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/56308226?v=4" width="100px;" alt="Foto de perfil Tiago Vota Cucco"/>
 
